@@ -170,6 +170,32 @@ h2 {
   line-height: 1;
 }
 
+.directory-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: -2px 0 18px;
+}
+
+.directory-strip a {
+  min-height: 36px;
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 8px 12px;
+  background: #fff;
+  color: var(--muted);
+  font-size: 0.9rem;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.directory-strip a:hover {
+  color: var(--ink);
+  text-decoration: underline;
+}
+
 .tool-grid {
   display: grid;
   grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.8fr);

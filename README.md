@@ -4,6 +4,12 @@ Free no-signup browser-only checker for Claude Code `settings.json` and hooks co
 
 Live app: https://claude-code-hooks-settings-checker.vercel.app/
 
+Public listing evidence:
+
+- Tiny Tool Town: https://www.tinytooltown.com/tools/claude-code-hooks-settings-checker/
+- No-Login listing: https://nologin.tools/tool/claude-code-hooks-settings-checker-vercel-app/
+- No-Login badge: https://nologin.tools/badge/claude-code-hooks-settings-checker-vercel-app/
+
 ## What It Checks
 
 - JSON parse errors before a settings file is committed.

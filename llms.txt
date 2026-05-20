@@ -4,6 +4,9 @@
 
 Canonical URL: https://claude-code-hooks-settings-checker.vercel.app/
 Source: https://github.com/Turner-Levey/claude-code-hooks-settings-checker
+Tiny Tool Town: https://www.tinytooltown.com/tools/claude-code-hooks-settings-checker/
+No-Login listing: https://nologin.tools/tool/claude-code-hooks-settings-checker-vercel-app/
+No-Login badge: https://nologin.tools/badge/claude-code-hooks-settings-checker-vercel-app/
 License: MIT
 Privacy: No signup, no upload, no cookies, no analytics, no tracking scripts.
 
