@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Claude Code Hooks Settings Checker</title>
+    <meta
+      name="description"
+      content="Free no-signup browser-only checker for Claude Code settings.json hooks, matchers, handler shape, and config file placement."
+    >
+    <link rel="canonical" href="https://claude-code-hooks-settings-checker.vercel.app/">
+    <meta name="robots" content="index,follow">
+    <meta property="og:title" content="Claude Code Hooks Settings Checker">
+    <meta
+      property="og:description"
+      content="Paste Claude Code settings.json and check hooks, matchers, handler objects, and config placement locally."
+    >
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://claude-code-hooks-settings-checker.vercel.app/">
+    <meta property="og:image" content="https://claude-code-hooks-settings-checker.vercel.app/og.svg">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="/styles.css">
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "Claude Code Hooks Settings Checker",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "Any",
+        "url": "https://claude-code-hooks-settings-checker.vercel.app/",
+        "description": "A free no-signup browser-only checker for Claude Code settings.json hooks, matchers, handler shape, and config file placement.",
+        "sameAs": [
+          "https://github.com/Turner-Levey/claude-code-hooks-settings-checker"
+        ],
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        },
+        "featureList": [
+          "Claude Code settings.json parse check",
+          "Hooks object shape check",
+          "Matcher shape check",
+          "Handler field check",
+          "Copyable Markdown report"
+        ]
+      }
+    </script>
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="/" aria-label="Claude Code Hooks Settings Checker home">
+        <span class="brand-mark">CC</span>
+        <span>Hooks Settings</span>
+      </a>
+      <nav aria-label="Project links">
+        <a href="/llms.txt">llms.txt</a>
+        <a href="https://github.com/Turner-Levey/claude-code-hooks-settings-checker">Source</a>
+        <a href="https://code.claude.com/docs/en/configuration">Claude Code docs</a>
+      </nav>
+    </header>
+
+    <main class="workspace">
+      <section class="intro" aria-labelledby="tool-title">
+        <div>
+          <p class="eyebrow">Local checker</p>
+          <h1 id="tool-title">Claude Code Hooks Settings Checker</h1>
+          <p class="lede">
+            Paste a Claude Code settings file and check JSON, hook event shape, matchers, handlers, and file-location assumptions before the config reaches a repo.
+          </p>
+        </div>
+        <div class="score-box" aria-live="polite">
+          <span class="score-label">Readiness</span>
+          <strong id="score-value">--</strong>
+          <span id="score-caption">Waiting for settings</span>
+        </div>
+      </section>
+
+      <section class="tool-grid" aria-label="Settings checker input">
+        <div class="panel">
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">Paste settings</p>
+              <h2>Claude Code JSON</h2>
+            </div>
+            <button class="small-button" id="load-sample" type="button">Sample</button>
+          </div>
+          <textarea
+            id="settings-input"
+            spellcheck="false"
+            placeholder="{&#10;  &quot;hooks&quot;: {&#10;    &quot;PreToolUse&quot;: [&#10;      {&#10;        &quot;matcher&quot;: &quot;Write|Edit&quot;,&#10;        &quot;hooks&quot;: [&#10;          { &quot;type&quot;: &quot;command&quot;, &quot;command&quot;: &quot;node scripts/check-file.js&quot; }&#10;        ]&#10;      }&#10;    ]&#10;  }&#10;}"
+          ></textarea>
+        </div>
+
+        <div class="panel controls" aria-label="Checker controls">
+          <div>
+            <p class="eyebrow">File type</p>
+            <h2>Where this JSON will live</h2>
+          </div>
+          <select id="file-kind">
+            <option value="project">Project .claude/settings.json</option>
+            <option value="local">Local .claude/settings.local.json</option>
+            <option value="user">User ~/.claude/settings.json</option>
+            <option value="plugin-hooks">Plugin hooks/hooks.json</option>
+            <option value="standalone-hooks">Standalone hooks.json</option>
+          </select>
+          <p class="hint">
+            The checker does not upload content. It only reads the JSON currently in this browser tab.
+          </p>
+          <div class="actions">
+            <button class="primary-button" id="analyze" type="button">Check settings</button>
+            <button class="secondary-button" id="copy-report" type="button">Copy report</button>
+            <button class="secondary-button" id="clear-all" type="button">Clear</button>
+          </div>
+          <ul class="source-list" aria-label="Sources">
+            <li><a href="https://code.claude.com/docs/en/configuration">Claude Code settings documentation</a></li>
+            <li><a href="https://docs.anthropic.com/en/docs/claude-code/hooks">Claude Code hooks reference</a></li>
+            <li><a href="https://docs.anthropic.com/en/docs/claude-code/troubleshooting">Claude Code troubleshooting notes</a></li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="results-grid" aria-label="Settings check report">
+        <div class="panel">
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">Findings</p>
+              <h2>Configuration shape</h2>
+            </div>
+            <span class="pill" id="issue-count">0 findings</span>
+          </div>
+          <div id="issues" class="issue-list"></div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">Summary</p>
+              <h2>Parsed hooks</h2>
+            </div>
+          </div>
+          <dl class="stats">
+            <div><dt>Events</dt><dd id="event-count">0</dd></div>
+            <div><dt>Handler groups</dt><dd id="group-count">0</dd></div>
+            <div><dt>Handlers</dt><dd id="handler-count">0</dd></div>
+            <div><dt>Matchers</dt><dd id="matcher-count">0</dd></div>
+          </dl>
+          <pre id="report-output" class="report-output" tabindex="0"></pre>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <span>No signup. No upload. No cookies. Independent project, not affiliated with Anthropic.</span>
+      <a href="https://claude-code-hooks-settings-checker.vercel.app/">claude-code-hooks-settings-checker.vercel.app</a>
+    </footer>
+
+    <script src="/script.js" defer></script>
+  </body>
+</html>

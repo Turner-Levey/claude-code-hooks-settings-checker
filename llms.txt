@@ -1,0 +1,26 @@
+# Claude Code Hooks Settings Checker
+
+> Free no-signup browser-only checker for Claude Code settings.json and hooks configuration shape.
+
+Canonical URL: https://claude-code-hooks-settings-checker.vercel.app/
+Source: https://github.com/Turner-Levey/claude-code-hooks-settings-checker
+License: MIT
+Privacy: No signup, no upload, no cookies, no analytics, no tracking scripts.
+
+## Use Cases
+
+- Validate JSON before committing Claude Code settings.
+- Check that hook events are nested under the `hooks` object.
+- Inspect handler entries for missing command, URL, prompt, agent, or MCP tool fields.
+- Catch matcher arrays, case-sensitive tool names, and events where matchers are not used.
+- Create a copyable Markdown report for repo setup notes.
+
+## Not Official
+
+This is an independent tool. It is not affiliated with or endorsed by Anthropic.
+
+## Sources
+
+- Claude Code settings documentation: https://code.claude.com/docs/en/configuration
+- Claude Code hooks reference: https://docs.anthropic.com/en/docs/claude-code/hooks
+- Claude Code troubleshooting: https://docs.anthropic.com/en/docs/claude-code/troubleshooting

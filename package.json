@@ -1,0 +1,8 @@
+{
+  "name": "claude-code-hooks-settings-checker",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "check": "node --check script.js && node --check submit-indexnow.mjs && node -e \"const fs=require('fs'); const s=fs.readFileSync('sitemap.xml','utf8'); if ((s.match(/<loc>/g)||[]).length !== 2) throw new Error('expected 2 sitemap URLs'); JSON.parse(fs.readFileSync('index.html','utf8').match(/<script type=\\\"application\\/ld\\+json\\\">([\\s\\S]*?)<\\/script>/)[1]);\""
+  }
+}
